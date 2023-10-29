@@ -27,6 +27,7 @@ export default function HomePage() {
   /* step1: 지문 생성 */
   const [step1_createType, step1_setCreateType] = useState<CreateType>();
   const [step1_topicIndex, step1_setTopicIndex] = useState<number>();
+  const [step1_topicInput, step1_setTopicInput] = useState<string>('');
   const [step1_passage, step1_setPassage] = useState<string>();
 
   const step1: Step1WithoutStep = useMemo(
@@ -35,10 +36,12 @@ export default function HomePage() {
       onCreateTypeChange: step1_setCreateType,
       topicIndex: step1_topicIndex,
       onTopicIndexChange: step1_setTopicIndex,
+      topicInput: step1_topicInput,
+      onTopicInputChange: step1_setTopicInput,
       passage: step1_passage,
       onPassageChange: step1_setPassage,
     }),
-    [step1_createType, step1_topicIndex, step1_passage]
+    [step1_createType, step1_topicIndex, step1_topicInput, step1_passage]
   );
   const step1_step: CreatePassageSubStep = getStep1Step(step1);
 

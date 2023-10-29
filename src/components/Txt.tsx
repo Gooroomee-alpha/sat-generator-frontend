@@ -33,7 +33,7 @@ export const Txt = forwardRef<HTMLSpanElement, TxtProps>(function Txt(
       style={{
         fontSize: size ? `${size - 2}px` : undefined,
         lineHeight: lineHeight ? `${lineHeight}px` : undefined,
-        fontWeight: weight - 100,
+        fontWeight: weight ? weight - 100 : undefined,
         color: color,
         textAlign: align,
         display: display,

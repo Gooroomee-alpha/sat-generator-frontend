@@ -5,6 +5,7 @@ import { RandomTopicStep } from './RandomTopicStep';
 import { useResource } from '@/providers/ResourceProvider';
 import { SwitchCase } from '@toss/react';
 import { EditPassageStep } from './EditPassageStep';
+import { InputTopicStep } from './InputTopicStep';
 
 export function CreatePassageStep() {
   const { step1 } = useResource();
@@ -20,7 +21,12 @@ export function CreatePassageStep() {
 
       <VStack gap={36}>
         <CreateTypeStep />
-        {step >= 2 && <>{createType === 'random' && <RandomTopicStep />}</>}
+        {step >= 2 && (
+          <>
+            {createType === 'random' && <RandomTopicStep />}
+            {createType === 'topic' && <InputTopicStep />}
+          </>
+        )}
         {step >= 3 && <EditPassageStep />}
       </VStack>
     </VStack>
