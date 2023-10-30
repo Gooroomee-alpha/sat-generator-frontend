@@ -72,9 +72,8 @@ export function EditQuestionStep() {
           오답 보기
         </Txt>
 
-        {choices
-          .filter((choice) => choice != answer)
-          .map((choice, index) => (
+        {choices.map((choice, index) =>
+          index === answerIndex ? null : (
             <Input
               key={index}
               value={choice}
@@ -85,7 +84,8 @@ export function EditQuestionStep() {
                 onChoicesChange(newChoices);
               }}
             />
-          ))}
+          )
+        )}
       </VStack>
 
       <HStack gap={10}>
