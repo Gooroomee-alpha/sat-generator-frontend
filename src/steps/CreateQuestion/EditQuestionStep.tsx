@@ -18,7 +18,6 @@ export function EditQuestionStep() {
     onChoicesChange,
   } = step2;
   const [isEditing, setIsEditing] = useState(false);
-
   const questionInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -30,6 +29,9 @@ export function EditQuestionStep() {
       );
     }
   }, [isEditing]);
+
+  if (!question || !answer || !choices) return null;
+  const answerIndex = choices.indexOf(answer);
 
   return (
     <SubStepItem title="생성된 문제를 확인하세요." id="edit-question">
@@ -53,13 +55,16 @@ export function EditQuestionStep() {
           정답 보기
         </Txt>
 
-        {answer && (
-          <Input
-            value={answer}
-            onChange={(e) => onAnswerChange(e.target.value)}
-            disabled={!isEditing}
-          />
-        )}
+        <Input
+          value={choices[answerIndex]}
+          onChange={(e) => {
+            const newChoices = [...choices];
+            newChoices[answerIndex] = e.target.value;
+            onChoicesChange(newChoices);
+            onAnswerChange(e.target.value);
+          }}
+          disabled={!isEditing}
+        />
       </VStack>
 
       <VStack gap={12}>
@@ -67,18 +72,20 @@ export function EditQuestionStep() {
           오답 보기
         </Txt>
 
-        {choices?.map((choice, index) => (
-          <Input
-            key={index}
-            value={choice}
-            disabled={!isEditing}
-            onChange={(e) => {
-              const newChoices = [...choices];
-              newChoices[index] = e.target.value;
-              onChoicesChange(newChoices);
-            }}
-          />
-        ))}
+        {choices
+          .filter((choice) => choice != answer)
+          .map((choice, index) => (
+            <Input
+              key={index}
+              value={choice}
+              disabled={!isEditing}
+              onChange={(e) => {
+                const newChoices = [...choices];
+                newChoices[index] = e.target.value;
+                onChoicesChange(newChoices);
+              }}
+            />
+          ))}
       </VStack>
 
       <HStack gap={10}>

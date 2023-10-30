@@ -2,14 +2,33 @@ import { Button } from '@/components/Button';
 import { Radio } from '@/components/Radio';
 import { SubStepItem } from '@/components/SubStepItem';
 import { useResource } from '@/providers/ResourceProvider';
+import { Subject, requestPassage } from '@/remotes';
+import { useState } from 'react';
 
-const randomTopics = ['과학', '문학', '예술', '역사', '사회', '랜덤'];
-const dummy =
-  'Psychologists Dacher Keltner and Jonathan Haidt have argued that experiencing awe—a sensation of reverence and wonder typically brought on by perceiving something grand or powerful—can enable us to feel more connected to others and thereby inspire us to act more altruistically. Keltner, along with Paul K. Piff, Pia Dietze, and colleagues, claims to have found evidence for this effect in a recent study where participants were asked to either gaze up at exceptionally tall trees in a nearby grove (reported to be a universally awe-inspiring experience) or stare at the exterior of a nearby, nondescript building. After one minute, an experimenter deliberately spilled a box of pens nearby.';
+const randomTopics = ['과학', '문학', '예술', '역사', '사회', '랜덤'] as const;
+
+function getSubject(topic: (typeof randomTopics)[number]): Subject {
+  switch (topic) {
+    case '과학':
+      return 'science';
+    case '문학':
+      return 'literature';
+    case '예술':
+      return 'art';
+    case '역사':
+      return 'history';
+    case '사회':
+      return 'social_science';
+    case '랜덤':
+      return 'random';
+  }
+}
 
 export function RandomTopicStep() {
   const { step1 } = useResource();
   const { step, topicIndex, onTopicIndexChange, onPassageChange } = step1;
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <SubStepItem title="주제를 선택하세요." disabled={step != 1} delay={0.4}>
@@ -20,9 +39,23 @@ export function RandomTopicStep() {
       </Radio.Group>
 
       <Button
+        style={{ width: 136 }}
+        loading={loading}
         disabled={topicIndex == null}
-        onClick={() => {
-          onPassageChange(dummy);
+        onClick={async () => {
+          if (topicIndex == null) return;
+
+          setLoading(true);
+          const subject = getSubject(randomTopics[topicIndex]);
+
+          try {
+            const { passage } = await requestPassage(subject);
+            onPassageChange(passage);
+          } catch (e) {
+            console.error(e);
+          } finally {
+            setLoading(false);
+          }
         }}
       >
         지문 생성하기

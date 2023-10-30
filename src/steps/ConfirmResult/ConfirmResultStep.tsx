@@ -37,10 +37,9 @@ export function ConfirmResultStep() {
           <Txt style={{ fontFamily: 'Times, sans-serif' }}>{question}</Txt>
 
           <VStack gap={5}>
-            <Txt style={{ fontFamily: 'Times, sans-serif' }}>A) {answer}</Txt>
             {choices?.map((choice, index) => (
               <Txt key={index} style={{ fontFamily: 'Times, sans-serif' }}>
-                {String.fromCharCode(66 + index)}) {choice}
+                {choice}
               </Txt>
             ))}
           </VStack>

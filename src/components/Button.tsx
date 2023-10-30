@@ -20,7 +20,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      disabled={disabled}
+      disabled={disabled || loading}
       className={classNames(
         'h-[50px] px-[24px] rounded-[12px] transition-colors w-fit',
         disabled
