@@ -4,7 +4,9 @@ import {
   ResourceContextType,
   ResourceProvider,
 } from '@/providers/ResourceProvider';
+import { ConfirmResultStep } from '@/steps/ConfirmResult/ConfirmResultStep';
 import { CreatePassageStep } from '@/steps/CreatePassage/CreatePassageStep';
+import { CreateQuestion } from '@/steps/CreateQuestion/CreateQuestionStep';
 import { CreatePassageSubStep, CreateType, Step } from '@/types/model';
 import { useMemo, useState } from 'react';
 
@@ -21,6 +23,16 @@ function getStep1Step(src: Step1WithoutStep): CreatePassageSubStep {
   }
 }
 
+type Step2WithoutStep = Omit<ResourceContextType['step2'], 'step'>;
+function getStep2Step(src: Step2WithoutStep): CreatePassageSubStep {
+  const { choices } = src;
+  if (choices != null) {
+    return 2;
+  } else {
+    return 1;
+  }
+}
+
 export default function HomePage() {
   const [step, setStep] = useState<Step>(1);
 
@@ -29,6 +41,13 @@ export default function HomePage() {
   const [step1_topicIndex, step1_setTopicIndex] = useState<number>();
   const [step1_topicInput, step1_setTopicInput] = useState<string>('');
   const [step1_passage, step1_setPassage] = useState<string>();
+
+  /* step2: 문제 생성 */
+  const [step2_questionTypeIndex, step2_setQuestionTypeIndex] =
+    useState<number>();
+  const [step2_question, step2_setQuestion] = useState<string>();
+  const [step2_answer, step2_setAnswer] = useState<string>();
+  const [step2_choices, step2_setChoices] = useState<string[]>();
 
   const step1: Step1WithoutStep = useMemo(
     () => ({
@@ -45,15 +64,35 @@ export default function HomePage() {
   );
   const step1_step: CreatePassageSubStep = getStep1Step(step1);
 
+  const step2: Step2WithoutStep = useMemo(
+    () => ({
+      questionTypeIndex: step2_questionTypeIndex,
+      question: step2_question,
+      answer: step2_answer,
+      choices: step2_choices,
+      onQuestionTypeIndexChange: step2_setQuestionTypeIndex,
+      onQuestionChange: step2_setQuestion,
+      onAnswerChange: step2_setAnswer,
+      onChoicesChange: step2_setChoices,
+    }),
+    [step2_answer, step2_choices, step2_question, step2_questionTypeIndex]
+  );
+  const step2_step: CreatePassageSubStep = getStep2Step(step2);
+
   const resource: ResourceContextType = useMemo(
     () => ({
       step,
+      onStepChange: setStep,
       step1: {
         step: step1_step,
         ...step1,
       },
+      step2: {
+        step: step2_step,
+        ...step2,
+      },
     }),
-    [step, step1_step, step1]
+    [step, step1_step, step1, step2_step, step2]
   );
 
   return (
@@ -62,10 +101,24 @@ export default function HomePage() {
         {step === 1 ? (
           <CreatePassageStep />
         ) : (
-          <StepButton step={1} title={'지문\n생성'} />
+          <StepButton step={1} title={'지문\n생성'} shadowDirection="right" />
         )}
-        <StepButton step={2} title={'문제\n생성'} />
-        <StepButton step={3} title={'결과\n확인'} />
+
+        {step === 2 ? (
+          <CreateQuestion />
+        ) : (
+          <StepButton
+            step={2}
+            title={'문제\n생성'}
+            shadowDirection={step < 2 ? 'left' : 'right'}
+          />
+        )}
+
+        {step === 3 ? (
+          <ConfirmResultStep />
+        ) : (
+          <StepButton step={3} title={'결과\n확인'} shadowDirection="left" />
+        )}
       </HStack>
     </ResourceProvider>
   );

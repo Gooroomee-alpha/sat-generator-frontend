@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 
 export type ResourceContextType = {
   step: Step;
+  onStepChange: (step: Step) => void;
   step1: {
     step: number;
     createType: CreateType | undefined;
@@ -14,10 +15,22 @@ export type ResourceContextType = {
     onTopicInputChange: (input: string) => void;
     onPassageChange: (passage: string) => void;
   };
+  step2: {
+    step: number;
+    questionTypeIndex: number | undefined;
+    question: string | undefined;
+    answer: string | undefined;
+    choices: string[] | undefined;
+    onQuestionTypeIndexChange: (index: number) => void;
+    onQuestionChange: (question: string) => void;
+    onAnswerChange: (answer: string) => void;
+    onChoicesChange: (choices: string[]) => void;
+  };
 };
 
 const ResourceContext = createContext<ResourceContextType>({
   step: 1,
+  onStepChange: () => {},
   step1: {
     step: 1,
     createType: undefined,
@@ -28,6 +41,17 @@ const ResourceContext = createContext<ResourceContextType>({
     onTopicIndexChange: () => {},
     onTopicInputChange: () => {},
     onPassageChange: () => {},
+  },
+  step2: {
+    step: 1,
+    questionTypeIndex: undefined,
+    question: undefined,
+    answer: undefined,
+    choices: [],
+    onQuestionTypeIndexChange: () => {},
+    onQuestionChange: () => {},
+    onAnswerChange: () => {},
+    onChoicesChange: () => {},
   },
 });
 

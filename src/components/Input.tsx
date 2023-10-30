@@ -1,12 +1,16 @@
-import { ComponentProps } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
-type InputProps = ComponentProps<'input'>;
+type InputProps = ComponentPropsWithoutRef<'input'>;
 
-export function Input({ placeholder, ...props }: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { placeholder, ...props },
+  ref
+) {
   return (
     <input
-      className="w-[400px] rounded-[8px] py-[12px] px-[16px] border-[2px] border-blue500 border-solid text-[18px] text-grey900 placeholder:text-grey500"
+      ref={ref}
+      className="w-[400px] rounded-[8px] py-[8px] px-[12px] border-[2px] border-blue500 border-solid text-[16px] text-grey900 placeholder:text-grey500"
       {...props}
     />
   );
-}
+});

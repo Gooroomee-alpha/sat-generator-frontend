@@ -4,21 +4,26 @@ import { Txt } from './Txt';
 import { motion } from 'framer-motion';
 
 type SubStepItemProps = {
+  id?: string;
   title: string;
   children: React.ReactNode;
   disabled?: boolean;
+  delay?: number;
 };
 
 export function SubStepItem({
+  id,
   title,
   children,
   disabled = false,
+  delay = 0,
 }: SubStepItemProps) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7 }}
+      id={id}
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: 'spring', damping: 10, stiffness: 50, delay }}
     >
       <VStack gap={12} className="relative">
         <Txt size={20} weight={600} color={colors.grey900}>
