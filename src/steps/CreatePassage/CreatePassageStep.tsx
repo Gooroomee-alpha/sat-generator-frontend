@@ -1,11 +1,8 @@
 import { VStack } from '@/components/Stack';
 import { StepTitle } from '@/components/StepTitle';
-import { CreateTypeStep } from './CreateTypeStep';
-import { RandomTopicStep } from './RandomTopicStep';
 import { useResource } from '@/providers/ResourceProvider';
-import { SwitchCase } from '@toss/react';
 import { EditPassageStep } from './EditPassageStep';
-import { InputTopicStep } from './InputTopicStep';
+import { RandomTopicStep } from './RandomTopicStep';
 
 export function CreatePassageStep() {
   const { step1 } = useResource();

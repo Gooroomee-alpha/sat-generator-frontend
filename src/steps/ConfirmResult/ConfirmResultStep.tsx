@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 export function ConfirmResultStep() {
   const { step1, step2 } = useResource();
   const { passage } = step1;
-  const { question, answer, choices } = step2;
+  const { question, choices } = step2;
 
   const router = useRouter();
 

@@ -42,7 +42,11 @@ export function SelectQuestionTypeStep() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <SubStepItem title="주제를 선택하세요." disabled={step != 1} delay={0.8}>
+    <SubStepItem
+      title="문제 유형을 선택하세요."
+      disabled={step != 1}
+      delay={0.8}
+    >
       <Radio.Group
         checkedIndex={questionTypeIndex}
         onChange={onQuestionTypeIndexChange}
