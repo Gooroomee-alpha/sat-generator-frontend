@@ -13,7 +13,7 @@ export function CreatePassageStep() {
       <StepTitle
         step={1}
         title="지문 생성하기"
-        description="BBC, Nature 등 신뢰있는 데서 가져온 글로 지문을 생성해보세요."
+        description="원하는 주제로 지문을 생성해보세요."
       />
 
       <VStack gap={36}>
