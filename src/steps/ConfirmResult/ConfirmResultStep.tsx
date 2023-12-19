@@ -27,19 +27,18 @@ export function ConfirmResultStep() {
         transition={{ type: 'spring', damping: 10, stiffness: 50, delay: 0.4 }}
       >
         <VStack gap={16}>
-          <Txt
-            className="block"
-            style={{ width: '400px', fontFamily: 'Times, sans-serif' }}
-          >
-            {passage}
-          </Txt>
+          {passage && <Txt
+            className='block times-font'
+            style={{ width: '400px' }}
+            dangerouslySetInnerHTML={{ __html: passage }}
+          />}
 
-          <Txt style={{ fontFamily: 'Times, sans-serif' }}>{question}</Txt>
+          <Txt className={'times-font'}>{question}</Txt>
 
           <VStack gap={5}>
             {choices?.map((choice, index) => (
               <Txt key={index} style={{ fontFamily: 'Times, sans-serif' }}>
-                {choice}
+                {String.fromCharCode(65 + index)}) {choice}
               </Txt>
             ))}
           </VStack>

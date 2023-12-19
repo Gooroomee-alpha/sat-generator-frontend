@@ -13,3 +13,10 @@ body {
   /* grey100 */
   background-color: #f8f9fa;
 }
+
+.times-font {
+  font-family: 'Times', 'sans-serif';
+}
+.times-font * {
+  font-family: 'Times', 'sans-serif';
+}

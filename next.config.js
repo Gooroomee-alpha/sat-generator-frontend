@@ -5,7 +5,7 @@ const nextConfig = {
     {
       source: '/api/:path*',
       destination:
-        'http://ec2-13-125-208-31.ap-northeast-2.compute.amazonaws.com/:path*',
+        'http://52.231.111.15:8000/:path*',
     },
   ],
 };

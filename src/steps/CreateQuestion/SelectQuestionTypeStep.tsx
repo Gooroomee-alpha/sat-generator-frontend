@@ -70,13 +70,13 @@ export function SelectQuestionTypeStep() {
           try {
             const {
               passage: resultPassage,
-              problem,
+              question,
               answer,
               choices,
             } = await requestProblem(passage, problemType);
 
             onPassageChange(resultPassage);
-            onQuestionChange(problem);
+            onQuestionChange(question);
             onAnswerChange(answer);
             onChoicesChange(choices);
 

@@ -23,7 +23,7 @@ export async function requestProblem(
 ) {
   const { data } = await client.post<{
     passage: string;
-    problem: string;
+    question: string;
     choices: string[];
     answer: string;
   }>('/sat/problem', { passage, problem_type: problemType });
