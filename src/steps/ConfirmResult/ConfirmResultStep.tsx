@@ -27,11 +27,13 @@ export function ConfirmResultStep() {
         transition={{ type: 'spring', damping: 10, stiffness: 50, delay: 0.4 }}
       >
         <VStack gap={16}>
-          {passage && <Txt
-            className='block times-font'
-            style={{ width: '400px' }}
-            dangerouslySetInnerHTML={{ __html: passage }}
-          />}
+          {passage && (
+            <Txt
+              className='block times-font'
+              style={{ width: '400px' }}
+              dangerouslySetInnerHTML={{ __html: passage }}
+            />
+          )}
 
           <Txt className={'times-font'}>{question}</Txt>
 

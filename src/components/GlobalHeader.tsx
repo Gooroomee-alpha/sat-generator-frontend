@@ -27,21 +27,6 @@ export function GlobalHeader() {
             구루미 SAT
           </Txt>
         </HStack>
-
-        <HStack gap={8}>
-          <CleanButton
-            active={category === 'one'}
-            onClick={() => router.push('/')}
-          >
-            문제 생성하기
-          </CleanButton>
-          <CleanButton
-            active={category === 'test'}
-            onClick={() => router.push('/test')}
-          >
-            문제지 생성
-          </CleanButton>
-        </HStack>
       </HStack>
     </HStack>
   );
