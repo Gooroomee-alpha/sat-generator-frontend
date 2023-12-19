@@ -23,6 +23,13 @@ export function EditQuestionStep() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [passage]);
+
+  useEffect(() => {
     if (isEditing) {
       textareaRef.current?.focus();
       textareaRef.current?.setSelectionRange(

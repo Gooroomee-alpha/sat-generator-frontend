@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 export function ConfirmResultStep() {
-  const { step1, step2 } = useResource();
+  const { step2 } = useResource();
   const { passage, question, choices } = step2;
 
   const router = useRouter();
