@@ -41,6 +41,9 @@ export default function HomePage() {
   const [step1_topicIndex, step1_setTopicIndex] = useState<number>();
   const [step1_topicInput, step1_setTopicInput] = useState<string>('');
   const [step1_passage, step1_setPassage] = useState<string>();
+  const [step1_hasConjunction, step1_setHasConjunction] = useState<boolean>(
+    false
+  );
 
   /* step2: 문제 생성 */
   const [step2_passage, step2_setPassage] = useState<string>();
@@ -60,8 +63,10 @@ export default function HomePage() {
       onTopicInputChange: step1_setTopicInput,
       passage: step1_passage,
       onPassageChange: step1_setPassage,
+      hasConjunction: step1_hasConjunction,
+      onHasConjunctionChange: step1_setHasConjunction,
     }),
-    [step1_createType, step1_topicIndex, step1_topicInput, step1_passage]
+    [step1_createType, step1_topicIndex, step1_topicInput, step1_passage, step1_hasConjunction]
   );
   const step1_step: CreatePassageSubStep = getStep1Step(step1);
 
@@ -78,7 +83,7 @@ export default function HomePage() {
       onAnswerChange: step2_setAnswer,
       onChoicesChange: step2_setChoices,
     }),
-    [step2_answer, step2_choices, step2_question, step2_questionTypeIndex]
+    [step2_answer, step2_choices, step2_question, step2_questionTypeIndex, step2_passage]
   );
   const step2_step: CreatePassageSubStep = getStep2Step(step2);
 

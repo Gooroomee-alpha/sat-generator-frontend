@@ -29,7 +29,7 @@ function getProblemType(
 
 export function SelectQuestionTypeStep() {
   const { step1, step2 } = useResource();
-  const { passage } = step1;
+  const { passage, hasConjunction } = step1;
   const {
     step,
     questionTypeIndex,
@@ -41,6 +41,7 @@ export function SelectQuestionTypeStep() {
   } = step2;
 
   const [loading, setLoading] = useState(false);
+  const QUESTION_TYPES = hasConjunction ? questionTypes : questionTypes.filter((questionType) => questionType != 'Transition');
 
   return (
     <SubStepItem
@@ -52,7 +53,7 @@ export function SelectQuestionTypeStep() {
         checkedIndex={questionTypeIndex}
         onChange={onQuestionTypeIndexChange}
       >
-        {questionTypes.map((questionType) => (
+        {QUESTION_TYPES.map((questionType) => (
           <Radio key={questionType}>{questionType}</Radio>
         ))}
       </Radio.Group>

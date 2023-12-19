@@ -10,10 +10,12 @@ export type ResourceContextType = {
     topicIndex: number | undefined;
     topicInput: string;
     passage: string | undefined;
+    hasConjunction: boolean;
     onCreateTypeChange: (createType: CreateType) => void;
     onTopicIndexChange: (index: number) => void;
     onTopicInputChange: (input: string) => void;
     onPassageChange: (passage: string) => void;
+    onHasConjunctionChange: (hasConjunction: boolean) => void;
   };
   step2: {
     step: number;
@@ -39,10 +41,12 @@ const ResourceContext = createContext<ResourceContextType>({
     topicIndex: undefined,
     topicInput: '',
     passage: undefined,
+    hasConjunction: false,
     onCreateTypeChange: () => {},
     onTopicIndexChange: () => {},
     onTopicInputChange: () => {},
     onPassageChange: () => {},
+    onHasConjunctionChange: () => {},
   },
   step2: {
     step: 1,

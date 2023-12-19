@@ -9,7 +9,7 @@ export type Subject =
   | 'random';
 
 export async function requestPassage(subject: Subject) {
-  const { data } = await client.post<{ passage: string }>('/sat/passage', {
+  const { data } = await client.post<{ passage: string; has_conjunction: boolean }>('/sat/passage', {
     subject,
   });
   return data;

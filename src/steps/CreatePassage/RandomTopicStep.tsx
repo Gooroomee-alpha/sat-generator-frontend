@@ -47,7 +47,7 @@ export function RandomTopicStep() {
           const subject = getSubject(randomTopics[topicIndex]);
 
           try {
-            const { passage } = await requestPassage(subject);
+            const { passage, has_conjunction } = await requestPassage(subject);
             onPassageChange(passage);
           } catch (e) {
             console.error(e);
