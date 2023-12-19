@@ -8,8 +8,7 @@ import { useRouter } from 'next/router';
 
 export function ConfirmResultStep() {
   const { step1, step2 } = useResource();
-  const { passage } = step1;
-  const { question, choices } = step2;
+  const { passage, question, choices } = step2;
 
   const router = useRouter();
 
@@ -17,8 +16,8 @@ export function ConfirmResultStep() {
     <VStack gap={40} className="flex-1" padding={{ y: 24, x: 28 }}>
       <StepTitle
         step={3}
-        title="결과 확인하기"
-        description="지문과 문제가 생성된 결과를 확인하세요."
+        title="Review Results"
+        description="Check the generated passage and question results."
       />
 
       <motion.div
@@ -51,7 +50,7 @@ export function ConfirmResultStep() {
               router.reload();
             }}
           >
-            ← 처음으로
+            ← Back to Start
           </Button>
         </VStack>
       </motion.div>

@@ -13,8 +13,8 @@ export function CreateQuestion() {
     <VStack gap={40} className="flex-1" padding={{ y: 24, x: 28 }}>
       <StepTitle
         step={2}
-        title="문제 생성하기"
-        description="다양한 유형의 문제를 생성해보세요."
+        title="Create Questions"
+        description="Generate questions of various types."
       />
 
       <VStack gap={36}>

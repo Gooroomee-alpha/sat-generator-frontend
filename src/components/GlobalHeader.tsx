@@ -24,7 +24,7 @@ export function GlobalHeader() {
         <HStack gap={10} align="center">
           <img src="/gooroomee-logo.png" width={64} height={64} alt="" />
           <Txt size={26} weight={700} color={colors.grey900}>
-            구루미 SAT
+            Gooroomee SAT
           </Txt>
         </HStack>
       </HStack>

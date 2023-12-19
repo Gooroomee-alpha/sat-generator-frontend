@@ -43,6 +43,7 @@ export default function HomePage() {
   const [step1_passage, step1_setPassage] = useState<string>();
 
   /* step2: 문제 생성 */
+  const [step2_passage, step2_setPassage] = useState<string>();
   const [step2_questionTypeIndex, step2_setQuestionTypeIndex] =
     useState<number>();
   const [step2_question, step2_setQuestion] = useState<string>();
@@ -66,10 +67,12 @@ export default function HomePage() {
 
   const step2: Step2WithoutStep = useMemo(
     () => ({
+      passage: step2_passage,
       questionTypeIndex: step2_questionTypeIndex,
       question: step2_question,
       answer: step2_answer,
       choices: step2_choices,
+      onPassageChange: step2_setPassage,
       onQuestionTypeIndexChange: step2_setQuestionTypeIndex,
       onQuestionChange: step2_setQuestion,
       onAnswerChange: step2_setAnswer,
@@ -101,7 +104,7 @@ export default function HomePage() {
         {step === 1 ? (
           <CreatePassageStep />
         ) : (
-          <StepButton step={1} title={'지문\n생성'} shadowDirection="right" />
+          <StepButton step={1} title={'Passage'} shadowDirection="right" />
         )}
 
         {step === 2 ? (
@@ -109,7 +112,7 @@ export default function HomePage() {
         ) : (
           <StepButton
             step={2}
-            title={'문제\n생성'}
+            title={'Question'}
             shadowDirection={step < 2 ? 'left' : 'right'}
           />
         )}
@@ -117,7 +120,7 @@ export default function HomePage() {
         {step === 3 ? (
           <ConfirmResultStep />
         ) : (
-          <StepButton step={3} title={'결과\n확인'} shadowDirection="left" />
+          <StepButton step={3} title={'Result'} shadowDirection="left" />
         )}
       </HStack>
     </ResourceProvider>

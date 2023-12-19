@@ -10,22 +10,24 @@ import { useEffect, useRef, useState } from 'react';
 export function EditQuestionStep() {
   const { step2, onStepChange } = useResource();
   const {
+    passage,
     question,
     answer,
     choices,
+    onPassageChange,
     onQuestionChange,
     onAnswerChange,
     onChoicesChange,
   } = step2;
   const [isEditing, setIsEditing] = useState(false);
-  const questionInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (isEditing) {
-      questionInputRef.current?.focus();
-      questionInputRef.current?.setSelectionRange(
-        questionInputRef.current.value.length,
-        questionInputRef.current.value.length
+      textareaRef.current?.focus();
+      textareaRef.current?.setSelectionRange(
+        textareaRef.current.value.length,
+        textareaRef.current.value.length
       );
     }
   }, [isEditing]);
@@ -34,15 +36,30 @@ export function EditQuestionStep() {
   const answerIndex = choices.indexOf(answer);
 
   return (
-    <SubStepItem title="생성된 문제를 확인하세요." id="edit-question">
+    <SubStepItem title="Review the Generated Question" id="edit-question">
       <VStack gap={12}>
         <Txt size={18} weight={600} color={colors.grey900}>
-          문제 텍스트
+          Passage
+        </Txt>
+
+        {passage && (
+          <textarea
+            ref={textareaRef}
+            disabled={!isEditing}
+            style={{ width: '400px', fontFamily: 'Times, sans-serif' }}
+            value={passage}
+            onChange={(e) => onPassageChange(e.target.value)}
+          />
+        )}
+      </VStack>
+
+      <VStack gap={12}>
+        <Txt size={18} weight={600} color={colors.grey900}>
+          Question
         </Txt>
 
         {question && (
           <Input
-            ref={questionInputRef}
             value={question}
             onChange={(e) => onQuestionChange(e.target.value)}
             disabled={!isEditing}
@@ -52,7 +69,7 @@ export function EditQuestionStep() {
 
       <VStack gap={12}>
         <Txt size={18} weight={600} color={colors.grey900}>
-          정답 보기
+          Correct Answer
         </Txt>
 
         <Input
@@ -69,7 +86,7 @@ export function EditQuestionStep() {
 
       <VStack gap={12}>
         <Txt size={18} weight={600} color={colors.grey900}>
-          오답 보기
+          Incorrect Options
         </Txt>
 
         {choices.map((choice, index) =>
@@ -95,7 +112,7 @@ export function EditQuestionStep() {
             setIsEditing((editing) => !editing);
           }}
         >
-          {isEditing ? '완료하기' : '편집하기'}
+          {isEditing ? 'Complete' : 'Edit'}
         </Button>
         {!isEditing && (
           <Button
@@ -104,7 +121,7 @@ export function EditQuestionStep() {
               onStepChange(3);
             }}
           >
-            → 다음 단계로
+            → Next Step
           </Button>
         )}
       </HStack>

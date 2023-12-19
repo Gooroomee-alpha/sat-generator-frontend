@@ -5,21 +5,19 @@ import { useResource } from '@/providers/ResourceProvider';
 import { Subject, requestPassage } from '@/remotes';
 import { useState } from 'react';
 
-const randomTopics = ['과학', '문학', '예술', '역사', '사회', '랜덤'] as const;
+const randomTopics = ['Science', 'Literature', 'Arts', 'Social Science', 'Random'] as const;
 
 function getSubject(topic: (typeof randomTopics)[number]): Subject {
   switch (topic) {
-    case '과학':
+    case 'Science':
       return 'science';
-    case '문학':
+    case 'Literature':
       return 'literature';
-    case '예술':
+    case 'Arts':
       return 'art';
-    case '역사':
-      return 'history';
-    case '사회':
+    case 'Social Science':
       return 'social_science';
-    case '랜덤':
+    case 'Random':
       return 'random';
   }
 }
@@ -31,7 +29,7 @@ export function RandomTopicStep() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <SubStepItem title="주제를 선택하세요." disabled={step != 1} delay={0.4}>
+    <SubStepItem title="Choose Your Topic" disabled={step != 1} delay={0.4}>
       <Radio.Group checkedIndex={topicIndex} onChange={onTopicIndexChange}>
         {randomTopics.map((topic) => (
           <Radio key={topic}>{topic}</Radio>
@@ -39,7 +37,7 @@ export function RandomTopicStep() {
       </Radio.Group>
 
       <Button
-        style={{ width: 136 }}
+        style={{ width: 115 }}
         loading={loading}
         disabled={topicIndex == null}
         onClick={async () => {
@@ -58,7 +56,7 @@ export function RandomTopicStep() {
           }
         }}
       >
-        지문 생성하기
+        Generate
       </Button>
     </SubStepItem>
   );

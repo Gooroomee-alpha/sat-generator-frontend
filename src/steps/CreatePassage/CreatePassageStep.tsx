@@ -12,8 +12,8 @@ export function CreatePassageStep() {
     <VStack gap={40} className="flex-1" padding={{ y: 24, x: 28 }}>
       <StepTitle
         step={1}
-        title="지문 생성하기"
-        description="원하는 주제로 지문을 생성해보세요."
+        title="Create Passage"
+        description="Craft an SAT-style passage on your chosen topic."
       />
 
       <VStack gap={36}>

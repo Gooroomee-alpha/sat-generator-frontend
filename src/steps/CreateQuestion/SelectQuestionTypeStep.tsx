@@ -6,33 +6,34 @@ import { ProblemType, requestProblem } from '@/remotes';
 import { useState } from 'react';
 
 const questionTypes = [
-  '단어 빈칸 찾기',
-  '주제 찾기',
-  '접속사 빈칸 찾기',
-  '문법 빈칸 찾기',
+  'Complete the Sentence',
+  'Main purpose',
+  'Transition',
+  'Convention of Standard English',
 ] as const;
 
 function getProblemType(
   questionType: (typeof questionTypes)[number]
 ): ProblemType {
   switch (questionType) {
-    case '단어 빈칸 찾기':
+    case 'Complete the Sentence':
       return 'blank';
-    case '주제 찾기':
+    case 'Main purpose':
       return 'find_subject';
-    case '접속사 빈칸 찾기':
+    case 'Transition':
       return 'conjunction';
-    case '문법 빈칸 찾기':
+    case 'Convention of Standard English':
       return 'grammar';
   }
 }
 
 export function SelectQuestionTypeStep() {
   const { step1, step2 } = useResource();
-  const { passage, onPassageChange } = step1;
+  const { passage } = step1;
   const {
     step,
     questionTypeIndex,
+    onPassageChange,
     onQuestionTypeIndexChange,
     onQuestionChange,
     onAnswerChange,
@@ -43,7 +44,7 @@ export function SelectQuestionTypeStep() {
 
   return (
     <SubStepItem
-      title="문제 유형을 선택하세요."
+      title="Select Question Type"
       disabled={step != 1}
       delay={0.8}
     >
@@ -57,7 +58,7 @@ export function SelectQuestionTypeStep() {
       </Radio.Group>
 
       <Button
-        style={{ width: 136 }}
+        style={{ width: 115 }}
         loading={loading}
         disabled={questionTypeIndex == null}
         onClick={async () => {
@@ -92,7 +93,7 @@ export function SelectQuestionTypeStep() {
           }
         }}
       >
-        문제 생성하기
+        Generate
       </Button>
     </SubStepItem>
   );

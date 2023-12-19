@@ -27,7 +27,7 @@ export function StepTitle({ step, title, description }: StepTitleProps) {
         </HStack>
 
         {description && (
-          <Txt size={18} weight={400} color={colors.grey600}>
+          <Txt size={18} weight={500} color={colors.grey600}>
             {description}
           </Txt>
         )}

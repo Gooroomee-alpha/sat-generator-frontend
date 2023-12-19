@@ -17,10 +17,12 @@ export type ResourceContextType = {
   };
   step2: {
     step: number;
+    passage: string | undefined;
     questionTypeIndex: number | undefined;
     question: string | undefined;
     answer: string | undefined;
     choices: string[] | undefined;
+    onPassageChange: (passage: string) => void;
     onQuestionTypeIndexChange: (index: number) => void;
     onQuestionChange: (question: string) => void;
     onAnswerChange: (answer: string) => void;
@@ -44,10 +46,12 @@ const ResourceContext = createContext<ResourceContextType>({
   },
   step2: {
     step: 1,
+    passage: undefined,
     questionTypeIndex: undefined,
     question: undefined,
     answer: undefined,
     choices: [],
+    onPassageChange: () => {},
     onQuestionTypeIndexChange: () => {},
     onQuestionChange: () => {},
     onAnswerChange: () => {},

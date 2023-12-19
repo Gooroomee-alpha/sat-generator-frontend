@@ -26,7 +26,7 @@ export function StepButton({ step, title, shadowDirection }: StepButtonProps) {
         </Txt>
 
         <Txt
-          size={22}
+          size={15}
           weight={600}
           color={colors.grey700}
           className="text-center whitespace-pre-line"

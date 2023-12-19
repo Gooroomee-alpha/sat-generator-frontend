@@ -9,7 +9,7 @@ export function Passage() {
   if (!passage) return null;
 
   return (
-    <SubStepItem title="문제 생성에 사용할 지문입니다." delay={0.4}>
+    <SubStepItem title="Passage for Question Creation" delay={0.4}>
       <Txt
         className="block times-font"
         style={{ width: '400px' }}

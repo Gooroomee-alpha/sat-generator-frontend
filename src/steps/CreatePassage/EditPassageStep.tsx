@@ -29,7 +29,7 @@ export function EditPassageStep() {
   }, [isEditing]);
 
   return (
-    <SubStepItem title="생성된 지문을 확인하세요.">
+    <SubStepItem title="Review the Generated Passage">
       <textarea
         ref={textareaRef}
         disabled={!isEditing}
@@ -45,7 +45,7 @@ export function EditPassageStep() {
             setIsEditing((editing) => !editing);
           }}
         >
-          {isEditing ? '완료하기' : '편집하기'}
+          {isEditing ? 'Complete' : 'Edit'}
         </Button>
         {!isEditing && (
           <Button
@@ -54,7 +54,7 @@ export function EditPassageStep() {
               onStepChange(2);
             }}
           >
-            → 다음 단계로
+            → Next Step
           </Button>
         )}
       </HStack>
