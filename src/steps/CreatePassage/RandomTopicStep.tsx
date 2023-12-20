@@ -24,7 +24,7 @@ function getSubject(topic: (typeof randomTopics)[number]): Subject {
 
 export function RandomTopicStep() {
   const { step1 } = useResource();
-  const { step, topicIndex, onTopicIndexChange, onPassageChange } = step1;
+  const { step, topicIndex, onTopicIndexChange, onPassageChange, onHasConjunctionChange } = step1;
 
   const [loading, setLoading] = useState(false);
 
@@ -49,6 +49,7 @@ export function RandomTopicStep() {
           try {
             const { passage, has_conjunction } = await requestPassage(subject);
             onPassageChange(passage);
+            onHasConjunctionChange(has_conjunction);
           } catch (e) {
             console.error(e);
           } finally {
