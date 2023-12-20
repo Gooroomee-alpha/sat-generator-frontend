@@ -8,9 +8,12 @@ import { useRouter } from 'next/router';
 
 export function ConfirmResultStep() {
   const { step2 } = useResource();
-  const { passage, question, choices } = step2;
+  const { passage, question, choices, answer } = step2;
 
+  const answerIndex = choices?.findIndex((choice) => choice === answer);
   const router = useRouter();
+
+  const toAlphabet = (index: number) => String.fromCharCode(65 + index);
 
   return (
     <VStack gap={40} className="flex-1" padding={{ y: 24, x: 28 }}>
@@ -39,10 +42,12 @@ export function ConfirmResultStep() {
           <VStack gap={5}>
             {choices?.map((choice, index) => (
               <Txt key={index} style={{ fontFamily: 'Times, sans-serif' }}>
-                {String.fromCharCode(65 + index)}) {choice}
+                {toAlphabet(index)}) {choice}
               </Txt>
             ))}
           </VStack>
+
+          {answerIndex != null && <Txt className={'times-font'}>Answer: {toAlphabet(answerIndex)}</Txt>}
 
           <Button
             variant="primary"
