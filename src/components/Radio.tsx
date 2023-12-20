@@ -6,6 +6,7 @@ import { colors } from '../constants/colors';
 import React from 'react';
 
 type RadioPublicProps = {
+  disabled?: boolean;
   children?: React.ReactNode;
 };
 type RadioPrivateProps = {
@@ -16,10 +17,11 @@ type RadioPrivateProps = {
 function Radio({
   children,
   checked,
+  disabled = false,
   onClick,
 }: RadioPublicProps & RadioPrivateProps) {
   return (
-    <HStack as="button" gap={8} align="center" onClick={onClick}>
+    <HStack as="button" gap={8} align="center" onClick={onClick} disabled={disabled} className={'disabled:opacity-40'}>
       <Icon
         name={checked ? 'radio-check-true' : 'radio-check-false'}
         size={24}

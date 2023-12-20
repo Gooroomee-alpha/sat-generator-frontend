@@ -41,7 +41,6 @@ export function SelectQuestionTypeStep() {
   } = step2;
 
   const [loading, setLoading] = useState(false);
-  const QUESTION_TYPES = hasConjunction ? questionTypes : questionTypes.filter((questionType) => questionType != 'Transition');
 
   return (
     <SubStepItem
@@ -53,8 +52,8 @@ export function SelectQuestionTypeStep() {
         checkedIndex={questionTypeIndex}
         onChange={onQuestionTypeIndexChange}
       >
-        {QUESTION_TYPES.map((questionType) => (
-          <Radio key={questionType}>{questionType}</Radio>
+        {questionTypes.map((questionType) => (
+          <Radio key={questionType} disabled={questionType === 'Transition' && !hasConjunction}>{questionType}</Radio>
         ))}
       </Radio.Group>
 
