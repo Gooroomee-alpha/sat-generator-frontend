@@ -4,6 +4,7 @@ import { SubStepItem } from '@/components/SubStepItem';
 import { useResource } from '@/providers/ResourceProvider';
 import { ProblemType, requestProblem } from '@/remotes';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const questionTypes = [
   'Complete the Sentence',
@@ -28,6 +29,8 @@ function getProblemType(
 }
 
 export function SelectQuestionTypeStep() {
+  const router = useRouter()
+
   const { step1, step2 } = useResource();
   const { passage, hasConjunction } = step1;
   const {
@@ -87,6 +90,11 @@ export function SelectQuestionTypeStep() {
                 ?.scrollIntoView({ block: 'start', behavior: 'smooth' });
             }, 100);
           } catch (e) {
+            const result = confirm('Failed to generate question. Please try again from the beginning.');
+            if (result) {
+              router.reload();
+            }
+
             console.error(e);
           } finally {
             setLoading(false);
